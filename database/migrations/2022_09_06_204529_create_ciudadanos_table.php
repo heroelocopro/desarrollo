@@ -35,8 +35,6 @@ return new class extends Migration
             $table->foreign('tipodoc_idtipodoc')->references('id')->on('tipodocs');
             $table->unsignedBigInteger('nivel_edu_idnivel');
             $table->foreign('nivel_edu_idnivel')->references('id')->on('nivel_edus');
-            $table->unsignedBigInteger('condicion_idcondicion');
-            $table->foreign('condicion_idcondicion')->references('id')->on('condicions');
             $table->unsignedBigInteger('dispositivos_tecnologicos_iddispositivos');
             $table->foreign('dispositivos_tecnologicos_iddispositivos')->references('id')->on('dispositivo_tecnologicos');
             $table->unsignedBigInteger('estrato_idestrato');
