@@ -1,3 +1,0 @@
-En el desarrollo de este repositorio, se utilizo los lenguajes de programacion HTML y PHP, el lenguaje estructurado SQL, y se trabajo el control de versiones
-a partir de una extension del Visual Studio Code llamada Live Share (Link principal de la extension: https://visualstudio.microsoft.com/es/services/live-share/)
-
