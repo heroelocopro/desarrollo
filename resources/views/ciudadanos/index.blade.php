@@ -1,7 +1,7 @@
 @extends('inicio')
 
 @section('contenido')
-    
+<!-- Aca comienza el index del usuario, donde podra registrar y consultar los sondeos-->
 <div id="Background"  class=" container-lg container-sm  ">
     <h3 class="text-center fw-2 "> Registro Ciudadanos</h3>
 
