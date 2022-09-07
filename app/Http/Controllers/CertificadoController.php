@@ -19,6 +19,8 @@ class CertificadoController extends Controller
      */
     public function index()
     {
+        
+
         $certificados = certificado::join("sondeos", "certificados.sondeos_idsondeos", "=", "sondeos.idsondeos")
             ->join("ciudadano_has_sondeos", "sondeos.idsondeos", "=", "ciudadano_has_sondeos.sondeos_idsondeos")
             ->join("ciudadano_has_sondeos", "ciudadanos.idsondeos", "=", "ciudadano_has_sondeos.sondeos_idsondeos")
@@ -58,7 +60,12 @@ class CertificadoController extends Controller
      */
     public function store(StorecertificadoRequest $request)
     {
-        //
+        $validacion = $request->validate([
+            'fecha_gen' => 'required',
+            'num_cert' => 'required|min_digits:6',
+        ]);
+
+        
     }
 
     /**
