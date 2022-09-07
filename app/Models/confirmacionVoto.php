@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class confirmacionVoto extends Model
 {
     use HasFactory;
+
+    protected $filleable = [
+        'conf_voto',
+    ];
+
 }

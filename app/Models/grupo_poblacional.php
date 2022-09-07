@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class grupo_poblacional extends Model
 {
     use HasFactory;
+
+    protected $filleable = [
+        'nom_grup_pob',
+    ];
 }

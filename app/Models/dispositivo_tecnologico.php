@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class dispositivo_tecnologico extends Model
 {
     use HasFactory;
+
+    protected $filleable = [
+        'nom_disp_tec',
+    ];
 }

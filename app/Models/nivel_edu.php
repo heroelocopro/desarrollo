@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class nivel_edu extends Model
 {
     use HasFactory;
+
+    protected $filleable = [
+        'nivel_edu'
+    ];
 }

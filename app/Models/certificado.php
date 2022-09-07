@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class certificado extends Model
 {
     use HasFactory;
+
+    protected $filleable = [
+        'fecha_gen',
+        'num_cert',
+    ];
 }
