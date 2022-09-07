@@ -12,5 +12,6 @@ class certificado extends Model
     protected $filleable = [
         'fecha_gen',
         'num_cert',
+        'sondeos_idsondeos'
     ];
 }

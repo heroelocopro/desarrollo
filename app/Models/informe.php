@@ -10,6 +10,7 @@ class informe extends Model
     use HasFactory;
 
     protected $filleable = [
-        'nombreinforme'
+        'nombreinforme',
+        'sondeos_idsondeos'
     ];
 }

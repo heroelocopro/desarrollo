@@ -23,10 +23,8 @@ class sondeo extends Model
         'administrador_usuario_idusuario',
         'preguntas_idpreguntas',
         'confirmacion_voto_idconfirmacion_voto',
-        'certificado_idcertificado',
         'filtro_idfiltro',
         'filtro_grupo_poblacional_idgrupo_poblacional',
         'condicion_idcondicion',
-        'informe_idinforme'
     ];
 }
