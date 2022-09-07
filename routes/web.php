@@ -31,6 +31,8 @@ Route::controller(CiudadanoController::class)->group(function () {
 
 Route::controller(SondeoController::class)->group(function () {
     Route::get('/sondeos','index')->name('sondeos');
+    Route::post('/sondeos','store')->name('registrarSondeos');
+    Route::get('/sondeos2','cargarSondeos')->name('verSondeos');
 });
 Route::controller(PreguntaController::class)->group(function () {
     Route::post('registrarPregunta','store')->name('registrarPregunta');
