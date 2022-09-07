@@ -36,7 +36,16 @@ class OpcionController extends Controller
      */
     public function store(StoreopcionRequest $request)
     {
-        //
+        $request->validate([
+            'opciones' => 'required',
+            'preguntas_idpreguntas' => 'required'
+        ]);
+        $opcion = new opcion;
+        $opcion->opciones = $request->opciones;
+        $opcion->preguntas_idpreguntas = $request->preguntas_idpreguntas;
+
+        $opcion->save();
+        return redirect()->route('sondeos');
     }
 
     /**

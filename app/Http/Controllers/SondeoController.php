@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\sondeo;
 use App\Http\Requests\StoresondeoRequest;
 use App\Http\Requests\UpdatesondeoRequest;
+use App\Models\opcion;
+use App\Models\pregunta;
 
 class SondeoController extends Controller
 {
@@ -15,7 +17,10 @@ class SondeoController extends Controller
      */
     public function index()
     {
-        //
+        $preguntas = pregunta::all();
+        $opciones = opcion::all();
+        return view('sondeos.index',['preguntas' => $preguntas , 'opciones' => 'opciones']);
+        
     }
 
     /**
