@@ -32,16 +32,12 @@ return new class extends Migration
             $table->foreign('preguntas_idpreguntas')->references('id')->on('preguntas');
             $table->unsignedBigInteger('confirmacion_voto_idconfirmacion');
             $table->foreign('confirmacion_voto_idconfirmacion')->references('id')->on('confirmacion_votos');
-            $table->unsignedBigInteger('certificado_idcertificado');
-            $table->foreign('certificado_idcertificado')->references('id')->on('certificados');
             $table->unsignedBigInteger('filtro_idfiltro');
             $table->foreign('filtro_idfiltro')->references('id')->on('filtros');
             $table->unsignedBigInteger('filtro_grupo_poblacional_idgrupo');
             $table->foreign('filtro_grupo_poblacional_idgrupo')->references('grupo_poblacional_id')->on('filtros');
             $table->unsignedBigInteger('condicion_idcondicion');
             $table->foreign('condicion_idcondicion')->references('id')->on('condicions');
-            $table->unsignedBigInteger('informe_idinforme');
-            $table->foreign('informe_idinforme')->references('id')->on('informes');
             $table->timestamps();
         });
     }

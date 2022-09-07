@@ -91,7 +91,8 @@
                 </div>
                 <div class="modal-body">
                     Seleccione o cree el filtro del sondeo
-                    <form action="" method="post" action="#">
+                    <form action="{{ route('registrarFiltro') }}" method="post" >
+                        @csrf
                         {{-- Edad inicial del sondeo --}}
                         <label class="form-label" for="" >Rango inicial de edad del sondeo</label>
                         <input name="edad_inicio" class="form-control" type="number" required>
@@ -106,26 +107,26 @@
 
                         {{-- Barrio selecta del sondeo --}}
                         <label class="form-label" for="" >Barrio selecta del sondeo</label>
-                        <input name="comuna" class="form-control" type="text" required>
+                        <input name="barrio" class="form-control" type="text" required>
 
                         {{-- Organizacion selecta del sondeo --}}
                         <label class="form-label" for="" >Organizacion selecta del sondeo</label>
-                        <input name="comuna" class="form-control" type="text" required>
+                        <input name="organizacion" class="form-control" type="text" required>
 
-                        <label for="">Preguntas y opciones</label>
+                        <label for="">grupo poblacional </label>
                         <select required class="form-select my-2" name="grupo_poblacional_idgrupo_poblacional" id="" required>     
-                            <option value="Mestizos">Mestizos</option>
-                            <option value="Caucásicos">Caucásicos</option>
-                            <option value="Afrocolombianos">Afrocolombianos</option>
-                            <option value="Palenqueros">Palenqueros</option>
-                            <option value="Raizales">Raizales</option>
-                            <option value="Indígenas">Indígenas</option>
+                            <option value="1">Mestizos</option>
+                            <option value="2">Caucásicos</option>
+                            <option value="3">Afrocolombianos</option>
+                            <option value="4">Palenqueros</option>
+                            <option value="5">Raizales</option>
+                            <option value="6">Indígenas</option>
                         </select>
+                        <button type="submit" class="btn btn-success">Guardar filtros</button>
                     </form>
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-success">Guardar pregunta</button>
                 </div>
             </div>
             </div>

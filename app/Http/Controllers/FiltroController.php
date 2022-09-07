@@ -36,7 +36,17 @@ class FiltroController extends Controller
      */
     public function store(StorefiltroRequest $request)
     {
-        //
+        $filtro = new filtro;
+        $filtro->edad_inicio = $request->edad_inicio;
+        $filtro->edad_final = $request->edad_final;
+        $filtro->comuna = $request->comuna;
+        $filtro->barrio = $request->barrio;
+        $filtro->organizacion = $request->organizacion;
+        $filtro->grupo_poblacional_id = $request->grupo_poblacional_idgrupo_poblacional;
+
+        $filtro->save();
+
+        return redirect()->route('sondeos');
     }
 
     /**

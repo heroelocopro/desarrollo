@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CiudadanoController;
+use App\Http\Controllers\FiltroController;
 use App\Http\Controllers\OpcionController;
 use App\Http\Controllers\PreguntaController;
 use App\Http\Controllers\SondeoController;
@@ -37,6 +38,10 @@ Route::controller(PreguntaController::class)->group(function () {
 
 Route::controller(OpcionController::class)->group(function () {
     Route::post('registrarOpcion','store')->name('registrarOpcion');
+});
+
+Route::controller(FiltroController::class)->group(function(){
+    Route::post('registrarFiltro','store')->name('registrarFiltro');
 });
 //Aca estan todos los recursos que deben utilizar las vistas, en donde se especifica las URL, asi como le da la posibilidad de poder acceder a estos metodos
 Route::resource('/Administrador/{$id}', AdministradorController::class)->middleware(['auth']);
