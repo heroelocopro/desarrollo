@@ -5,8 +5,8 @@
 <div id="Background"  class=" container-lg container-sm  ">
     <h3 class="text-center fw-2 "> Registro Ciudadanos</h3>
 
-    @if (session('success'))
-        <p class="text-succes">{{ session('success') }}</p>
+    @if (session('status'))
+        <p class="text-success text-center fw-bold fs-2">{{ session('status') }}</p>
     @endif
 
     <p class="text-center">Aviso: Todos los campos que se van a llenar en sondeo son obligatorios </p>
@@ -133,7 +133,7 @@
         </div>
 
 
-    <form class="w-auto form-control w-50 rounded-3 border-dark shadow" method="post" action="  " enctype="multipart/form-data">
+    <form class="w-auto form-control w-50 rounded-3 border-dark shadow" method="post" action="{{ route('registrarSondeos') }}" enctype="multipart/form-data">
         @csrf
 
         <!--Tema de sondeo-->
@@ -237,9 +237,15 @@
             <p class="text-danger">{{ $message }}</p>
         @enderror
         
+        <label class="form-label" for="">Seleccione el filtro anteriormente creado</label>
+        <select class="form-select" name="filtro_idfiltro" id="">
 
-        
-
+            @foreach ($filtros as $filtro )
+            <option value="{{ $filtro->id }}"> {{ $filtro->organizacion }} </option>
+            @endforeach
+            
+        </select>
+            
         {{-- <label for="">Preguntas y opciones</label>
         <select required class="form-select my-2" name="preguntas_idpreguntas" id="" required>
             @foreach ($preguntas as $pregunta )
