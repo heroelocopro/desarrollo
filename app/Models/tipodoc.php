@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class tipodoc extends Model
 {
     use HasFactory;
+
+    protected $filleable = [
+        'nombre_tipo_doc',
+    ];
 }

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class pregunta extends Model
 {
     use HasFactory;
+
+    protected $filleable = [
+        'nom_preguntas'
+    ];
+
 }

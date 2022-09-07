@@ -10,7 +10,8 @@ class administrador extends Model
     use HasFactory;
 
     protected $filleable = [
-        '',
-        ''
+        'credencial_adm',
+        'usuario_idusuario'
+
     ];
 }
