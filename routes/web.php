@@ -6,7 +6,7 @@ use App\Http\Controllers\OpcionController;
 use App\Http\Controllers\PreguntaController;
 use App\Http\Controllers\SondeoController;
 use Illuminate\Support\Facades\Route;
-use App\Exports\InformeExport;
+use App\Exports\SondeoExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 /*
@@ -54,7 +54,7 @@ Route::get('/certificado', [CertificadoController::class,'index']);
 Route::get('/certificado/pdf', [CertificadoController::class, 'createPDF'])->name('certificado-sondeo.pdf');
 
 Route::get('/excel', function () {
-    return Excel::download(new InformeExport, 'Informes.xlsx');
+    return Excel::download(new SondeoExport, 'Informes.xlsx');
 });
 
 Route::resource('/CiudadanoHasSondeos', CiudadanoHasSondeosController::class);

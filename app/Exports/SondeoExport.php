@@ -2,12 +2,13 @@
 
 namespace App\Exports;
 
+use App\Json;
 use App\Models\sondeo;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\WithStyles;
 
-class SondeoExport implements FromCollection, FromQuery, WithHeadings
+class SondeoExport implements FromCollection, WithHeadings
 {
 
     public function headings(): array

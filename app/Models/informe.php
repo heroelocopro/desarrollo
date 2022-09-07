@@ -11,6 +11,6 @@ class informe extends Model
 
     protected $filleable = [
         'nombreinforme',
-        'sondeos_idsondeos'
+        'sondeo_idsondeo'
     ];
 }
