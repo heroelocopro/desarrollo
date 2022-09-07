@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ciudadano;
+use App\Models\usuario;
+use App\Http\Requests\StoreusuarioRequest;
 use App\Http\Requests\StoreciudadanoRequest;
 use App\Http\Requests\UpdateciudadanoRequest;
 
@@ -62,6 +64,12 @@ class CiudadanoController extends Controller
             'afiliacion' => 'required'
         ]);
 
+        $usuario = new usuario;
+        $usuario->id = 0;
+        $usuario->usuario = $request->nombres;
+        $usuario->contrasena = '123456789';
+        $usuario->save();
+
         //Ya despues de la validacion, se llenan en un array del Modelo, es decir, genera un array, y se va llenando
         //Conforme
         $ciudadano = new ciudadano;
@@ -77,7 +85,7 @@ class CiudadanoController extends Controller
         $ciudadano->etnia = $request->etnia;
         $ciudadano->cond_disca = $request->cond_discapacitado;
         $ciudadano->conec_inter = $request->conectividad;
-        $ciudadano->usuario_idusuario = 1;
+        $ciudadano->usuario_idusuario = $usuario->id;
         $ciudadano->sexo_idsexo = $request->sexo;
         $ciudadano->tipodoc_idtipodoc = $request->TipoDocumento;
         $ciudadano->nivel_edu_idnivel = $request->nivel_edu;
@@ -85,7 +93,7 @@ class CiudadanoController extends Controller
         $ciudadano->estrato_idestrato = $request->estrato;
         $ciudadano->save();
 
-        return redirect()->route('Ciudadano.index')->with('success' , 'Ciudadano Registrado con exito');
+        return redirect()->route('registroCiudadano')->with('success' , 'Ciudadano Registrado con exito');
         
     }
 

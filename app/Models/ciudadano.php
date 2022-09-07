@@ -12,7 +12,6 @@ class ciudadano extends Model
     //Indica los campos que se tienen que llenar
     protected $filleable = [
         'TipoDocumento',
-        'TipoDocumento' ,
         'numeroDocumento',
         'nombres'  ,
         'apellidos'  ,

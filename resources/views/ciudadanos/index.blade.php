@@ -6,7 +6,7 @@
     <h3 class="text-center fw-2 "> Registro Ciudadanos</h3>
 
     @if (session('success'))
-        <p class="text-succes">{{ session('success') }}</p>
+        <p class="text-success text-center alert alert-success">{{ session('success') }}</p>
     @endif
 
     <p class="text-center">Todos los campos con un  <span class="text-danger fs-2">*</span> Son obligatorios </p>
