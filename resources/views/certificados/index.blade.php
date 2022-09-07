@@ -15,11 +15,11 @@
                 <h2>Lista de certificados</h2>
             </div>
             <div class="col-md-4">
-                <div class="mb-4 d-flex justify-content-end">
-                    <a class="btn btn-primary" href="{{ URL::to('#') }}">Convertir a PDF</a>
+                <div class="mb-2 d-flex justify-content-end">
+                    {{ $certificados->links() }}
                 </div>
                 <div class="mb-4 d-flex justify-content-end">
-                    {{ $certificados->links() }}
+                    <a class="btn btn-primary" href="{{ URL::to('#') }}">Convertir a PDF</a>
                 </div>
             </div>
         </div>
