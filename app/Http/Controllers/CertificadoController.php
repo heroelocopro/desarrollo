@@ -20,7 +20,13 @@ class CertificadoController extends Controller
      */
     public function index()
     {
-        $certificados = DB::select('SELECT sondeos.tema,certificados.fecha_gen,certificados.num_cert,ciudadanos.nombres,ciudadanos.apellidos,ciudadanos.num_docs FROM certificados INNER JOIN sondeos on certificados.sondeos_id = sondeos.idsondeos INNER JOIN ciudadano_has_sondeos ON sondeos.idsondeos = ciudadano_has_sondeos.ciudadano_has_sondeo_idsondeo INNER JOIN ciudadanos on ciudadano_has_sondeos.ciudadano_usuario_idusuario = ciudadanos.usuario_idusuario WHERE ciudadano_has_sondeos.ciudadano_has_sondeo_idsondeo = certificados.sondeos_id;')->paginate(1)->get();
+        $certificados = DB::table('certificados')
+        ->select('sondeos.tema','certificados.fecha_gen','certificados.num_cert','ciudadanos.nombres','ciudadanos.apellidos','ciudadanos.num_docs')
+        ->join('sondeos','certificados.sondeos_id','=', 'sondeos.idsondeos')
+        ->join('ciudadano_has_sondeos','sondeos.idsondeos','=','ciudadano_has_sondeos.ciudadano_has_sondeo_idsondeo')
+        ->join('ciudadanos','ciudadano_has_sondeos.ciudadano_usuario_idusuario','=', 'ciudadanos.usuario_idusuario')->where('ciudadano_has_sondeos.ciudadano_has_sondeo_idsondeo','=','certificados.sondeos_id;')
+        ->paginate(1)
+        ->get();
     }
     /**
      * Show the form for creating a new resource.
