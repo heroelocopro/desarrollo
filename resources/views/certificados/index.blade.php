@@ -11,7 +11,7 @@
 <body>
     <div class="container mt-4">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <h2>Lista de certificados</h2>
             </div>
             <div class="col-md-4">
