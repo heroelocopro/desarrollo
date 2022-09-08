@@ -45,12 +45,12 @@ class SondeoController extends Controller
         #$ciudadanos = DB::select('select users.id,ciudadanos.* from users
         #inner join ciudadanos on users.id ='.auth()->user()->id );
 
-     
+        $opciones = opcion::all();
 
         $filtros2 = filtro::all();
         
 
-        return view('sondeos.show',['sondeos' => $sondeos, 'filtros' => $filtros2,'preguntas' => $preguntas, 'respuestas' => $respuestas ,'grupopreguntas' => $grupospreguntas]);
+        return view('sondeos.show',['sondeos' => $sondeos, 'filtros' => $filtros2,'preguntas' => $preguntas, 'respuestas' => $respuestas ,'grupopreguntas' => $grupospreguntas,'opciones' => $opciones]);
     }
 
     /**

@@ -52,6 +52,9 @@ Route::controller(FiltroController::class)->group(function(){
 Route::controller(GrupoPreguntaController::class)->group(function () {
     Route::post('registrarGrupoPregunta','store')->name('registrarGrupoPregunta');
 });
+Route::controller(OpcionController::class)->group(function(){
+    Route::post('registrarOpcion','store')->name('registrarOpcion');
+});
 //Aca estan todos los recursos que deben utilizar las vistas, en donde se especifica las URL, asi como le da la posibilidad de poder acceder a estos metodos
 Route::resource('/Administrador/{$id}', AdministradorController::class)->middleware(['auth']);
 

@@ -12,6 +12,8 @@
     <p class="text-center">Aviso: Todos los campos que se van a llenar en sondeo son obligatorios </p>
     <div class="container  ">
 
+        <a href="  "></a>
+
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal4">
             Crear Grupo Preguntas
         </button>
@@ -94,16 +96,24 @@
                 </div>
                 <div class="modal-body">
                     En este segmento, usted creara las respuestas de cada pregunta que considere para el sondeo
-                    <form action="{{ route('registrarRespuesta') }}" method="post" >
+                    <form action="{{ route('registrarOpcion') }}" method="post" >
                         @csrf
                         <label for="">seleccione la pregunta para hacer la respuesta    </label>
+
+                        <br>
+                        <label for="">Pregunta</label>
                         <select required class="form-select my-2" name="preguntas_idpreguntas" id="" >
                             @foreach ($preguntas as $pregunta )
                                 <option value=" {{ $pregunta->id }} "> {{ $pregunta->nombre_pregunta }} </option>
                             @endforeach
                         </select>
+
                         <label class="form-label" for="" >Opcion</label>
-                        <input name="respuesta" class="form-control" type="text" required>
+                            <select name="Opcion" class="form-select" id="">
+                                @foreach ($opciones as $opcion )
+                                    <option value="{{ $opcion->opciones }}">{{ $opcion->opciones }}</option>
+                                @endforeach
+                            </select>   
                         <button type="submit" class="btn btn-success">Guardar opcion</button>
                     </form>
                 </div>

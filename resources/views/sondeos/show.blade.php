@@ -24,7 +24,14 @@
             <form class="form-control mb-3" action="">
                 @foreach ($preguntas as $pregunta )
         @if($pregunta->grupoid == $sondeo->preguntas_idpreguntas)
-        {{ $pregunta->nombre_pregunta }}
+        <label class="form-label">{{ $pregunta->nombre_pregunta }}</label>
+        <select class="form-select" name="" id="">
+       @foreach ($opciones as $opcion )
+           @if($opcion->preguntas_idpreguntas == $pregunta->id)
+           <option value="{{ $opcion->id }}"> {{ $opcion->opciones }} </option>
+           @endif
+       @endforeach 
+        </select>
         @endif
         @endforeach
                 
