@@ -3,7 +3,8 @@
 
 <div class="container">
     <div class="row">
-
+        
+        
         @foreach ($sondeos as $sondeo )
         
     
@@ -21,7 +22,11 @@
             
             <h4 class="text-center">Inicio de preguntas</h4>
             <form class="form-control mb-3" action="">
-                
+                @foreach ($preguntas as $pregunta )
+        @if($pregunta->grupoid == $sondeo->preguntas_idpreguntas)
+        {{ $pregunta->nombre_pregunta }}
+        @endif
+        @endforeach
                 
                 
                 

@@ -34,7 +34,8 @@ class SondeoController extends Controller
 
     public function cargarSondeos(){
         $grupospreguntas = grupo_pregunta::all();
-        $preguntas = pregunta::all();
+        $preguntas = DB::select('select preguntas.id,  preguntas.nombre_pregunta, grupo_preguntas.id as grupoid from preguntas
+        inner join grupo_preguntas on preguntas.grupopreguntas_id = grupo_preguntas.id;');
         $respuestas = respuesta_pregunta::all();
 
         $sondeos = DB::select('select * from sondeos where fecha_cierre > curdate() and fecha_inicio < curdate();');
@@ -49,7 +50,7 @@ class SondeoController extends Controller
         $filtros2 = filtro::all();
         
 
-        return view('sondeos.show',['sondeos' => $sondeos, 'filtros' => $filtros2]);
+        return view('sondeos.show',['sondeos' => $sondeos, 'filtros' => $filtros2,'preguntas' => $preguntas, 'respuestas' => $respuestas ,'grupopreguntas' => $grupospreguntas]);
     }
 
     /**
