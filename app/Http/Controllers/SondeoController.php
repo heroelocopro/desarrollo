@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\sondeo;
 use App\Http\Requests\StoresondeoRequest;
 use App\Http\Requests\UpdatesondeoRequest;
+use App\Models\ciudadano;
 use App\Models\filtro;
 use App\Models\grupo_pregunta;
 use App\Models\opcion;
@@ -36,9 +37,19 @@ class SondeoController extends Controller
         $preguntas = pregunta::all();
         $respuestas = respuesta_pregunta::all();
 
-        $sondeos = DB::select('select * from sondeos where fecha_cierre < curdate() and fecha_inicio < curdate();');
+        $sondeos = DB::select('select * from sondeos where fecha_cierre > curdate() and fecha_inicio < curdate();');
+        // $filtros = DB::select('select sondeos.tema , sondeos.filtro_idfiltro, sondeos.filtro_grupo_poblacional_idgrupo,
+        // grupo_poblacionals.id, grupo_poblacionals.nom_grup_pob from sondeos
+        // inner join grupo_poblacionals on sondeos.filtro_grupo_poblacional_idgrupo = grupo_poblacionals.id where grupo_poblacionals.nom_grup_pob = ciudadanos.etnia');
+        #$ciudadanos = DB::select('select users.id,ciudadanos.* from users
+        #inner join ciudadanos on users.id ='.auth()->user()->id );
 
-        return view('sondeos.show',['sondeos' => $sondeos]);
+     
+
+        $filtros2 = filtro::all();
+        
+
+        return view('sondeos.show',['sondeos' => $sondeos, 'filtros' => $filtros2]);
     }
 
     /**
@@ -67,7 +78,11 @@ class SondeoController extends Controller
         $sondeo->hora_inicio = $request->hora_inicio;
         $sondeo->tipo = $request->tipo;
         $sondeo->fecha_cierre = $request->fecha_cierre;
-        $sondeo->icono = $request->icono;
+        if($request->hasFile('icono')){
+            $image = $request->file('icono');
+            $image->move('uploads', $image->getClientOriginalName());
+            $sondeo->icono = $image->getClientOriginalName();
+        }
         $sondeo->hora_cierre = $request->hora_cierre;
         $sondeo->fecha_pub = $request->fecha_pub;
         $sondeo->hora_pub = $request->hora_pub;
