@@ -5,6 +5,7 @@ use App\Http\Controllers\FiltroController;
 use App\Http\Controllers\OpcionController;
 use App\Http\Controllers\PreguntaController;
 use App\Http\Controllers\SondeoController;
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 use App\Exports\SondeoExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -78,3 +79,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+
+
+
+Route::get('pdf', [PdfController::class, 'index']);

@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Json;
 use App\Models\sondeo;
+use App\Models\opcion;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
@@ -16,8 +17,6 @@ class SondeoExport implements FromCollection, WithHeadings
         return [
             '#ID',
             'Nombre Informe',
-            'ID Sondeo de informe',
-            'ID del sondeo',
             'Tema del sondeo',
             'Fecha inicial del sondeo',
             'Hora inicial del sondeo',
@@ -27,13 +26,10 @@ class SondeoExport implements FromCollection, WithHeadings
             'Hora de cierre del sondeo',
             'Fecha de publicacion del sondeo',
             'Hora de publicacion del sondeo',
-            'ID del Administrador asociado al sondeo',
-            'ID Usuario del Administrador',
-            'ID de preguntas asociadas',
-            'ID de Confirmacion de voto o participacion del ciudadano al sondeo',
-            'ID del Filtro del sondeo',
-            'ID del grupo poblacional del filtro',
-            'ID de la condicion del ciudadano',
+            'Preguntas del sondeo',
+            'Opciones del sondeo',
+            'Cantidad de personas participantes',
+            'Cantidad de personas por opcion',
         ];
     }
 
@@ -42,10 +38,13 @@ class SondeoExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        $sondeoExcel = sondeo::join("sondeos", "informe.sondeos_idsondeos", "=", "sondeos.idsondeos")
+
+        $sondeoExcel = sondeo::join("informe", "sondeos.idsondeos", "=", "informe.sondeos_idsondeos")
             ->join("ciudadano_has_sondeos", "sondeos.idsondeos", "=", "ciudadano_has_sondeos.sondeos_idsondeos")
-            ->join("ciudadano_has_sondeos", "ciudadanos.idsondeos", "=", "ciudadano_has_sondeos.sondeos_idsondeos")
-            ->select('informe.*','sondeos.*')
+            ->join("ciudadanos", "ciudadano_has_sondeos.sondeos_idsondeos", "=", "ciudadanos.idsondeos")
+            ->join("preguntas", "sondeos.preguntas_idpreguntas", "=", "preguntas.id")
+            ->join("opcions", "preguntas.id", "=", "opcions.preguntas_idpreguntas")
+            ->select('informe.id','informe.nombre_informe','sondeos.tema','sondeos.fecha_inicio','sondeos.hora_inicio','sondeos.tipo','sondeos.fecha_cierre','sondeos.icono','sondeos.hora_cierre','sondeos.fecha_pub','sondeos.hora_pub','count("sondeos.preguntas_idpreguntas")','count("opcions.id")','count("ciudadanos_has_sondeos.ciudadano_usuario_idusuario")','count("")')
             ->where("ciudadano_has_sondeos.sondeos_idsondeos", "=", 'certificados.sondeos_idsondeos');
         return sondeo::all();
     }

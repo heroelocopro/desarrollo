@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\certificado;
 use App\Models\ciudadano_has_sondeo;
 use App\Models\ciudadano;
@@ -19,28 +20,7 @@ class CertificadoController extends Controller
      */
     public function index()
     {
-        
-
-        $certificados = certificado::join("sondeos", "certificados.sondeos_idsondeos", "=", "sondeos.idsondeos")
-            ->join("ciudadano_has_sondeos", "sondeos.idsondeos", "=", "ciudadano_has_sondeos.sondeos_idsondeos")
-            ->join("ciudadano_has_sondeos", "ciudadanos.idsondeos", "=", "ciudadano_has_sondeos.sondeos_idsondeos")
-            ->select('sondeos.tema','certificados.fecha_gen','certificados.num_cert','ciudadanos.nombres','ciudadanos.apellidos','ciudadanos.num_doc')
-            ->where("ciudadano_has_sondeos.sondeos_idsondeos", "=", 'certificados.sondeos_idsondeos')
-            ->paginate(1)->get();
-    }
-
-    public function createPDF(){
-
-        $certificados = certificado::join("sondeos", "certificados.sondeos_idsondeos", "=", "sondeos.idsondeos")
-            ->join("ciudadano_has_sondeos", "sondeos.idsondeos", "=", "ciudadano_has_sondeos.sondeos_idsondeos")
-            ->join("ciudadano_has_sondeos", "ciudadanos.idsondeos", "=", "ciudadano_has_sondeos.sondeos_idsondeos")
-            ->select('sondeos.tema','certificados.fecha_gen','certificados.num_cert','ciudadanos.nombres','ciudadanos.apellidos','ciudadanos.num_doc')
-            ->where("ciudadano_has_sondeos.sondeos_idsondeos", "=", 'certificados.sondeos_idsondeos');
-
-        //Recuperar todos los productos de la db
-        view()->share('certificados', $certificados);
-        $pdf = PDF::loadView('index', $certificados);
-        return $pdf->download('certificado-sondeo.pdf');
+        $certificados = DB::select('SELECT sondeos.tema,certificados.fecha_gen,certificados.num_cert,ciudadanos.nombres,ciudadanos.apellidos,ciudadanos.num_docs FROM certificados INNER JOIN sondeos on certificados.sondeos_id = sondeos.idsondeos INNER JOIN ciudadano_has_sondeos ON sondeos.idsondeos = ciudadano_has_sondeos.ciudadano_has_sondeo_idsondeo INNER JOIN ciudadanos on ciudadano_has_sondeos.ciudadano_usuario_idusuario = ciudadanos.usuario_idusuario WHERE ciudadano_has_sondeos.ciudadano_has_sondeo_idsondeo = certificados.sondeos_id;')->paginate(1)->get();
     }
     /**
      * Show the form for creating a new resource.
@@ -65,7 +45,7 @@ class CertificadoController extends Controller
             'num_cert' => 'required|min_digits:6',
         ]);
 
-        
+
     }
 
     /**
