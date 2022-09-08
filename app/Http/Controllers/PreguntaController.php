@@ -37,12 +37,12 @@ class PreguntaController extends Controller
     public function store(StorepreguntaRequest $request)
     {
         //
-        $request->validate([
-            'nom_preguntas' => 'required',
-        ]);
+        
 
         $pregunta = new pregunta;
-        $pregunta->nom_preguntas = $request->nom_preguntas;
+        $pregunta->grupopreguntas_id = $request->grupopreguntas_id;
+        $pregunta->nombre_pregunta = $request->nombre_pregunta;
+        
         $pregunta->save();
 
         return back();

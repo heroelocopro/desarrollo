@@ -17,19 +17,46 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+              @if(auth()->check() )
+
+
+              @if(auth()->user()->role == 'admin')
+              <li class="nav-item mx-3">
+                <a class="nav-link text-white  " href=" {{ route('sondeos') }} ">Registrar Sondeos</a>
+              </li>
+              @endif
+              @endif
+              
+              @if(auth()->check() )
+              <li class="nav-item mx-3">
+                <a class="nav-link text-white  " href=" {{ route('verSondeos') }} ">Ver Sondeos</a>
+              </li>
+              @else
               <li class="nav-item">
                 <a class="nav-link text-white" href=" {{ route('registroCiudadano') }} ">Registro ciudadano</a>
               </li>
-              <li class="nav-item mx-3">
-                <a class="nav-link text-white  " href="#">Sondeos</a>
-              </li>
+              @endif
             </ul>
             
           </div>
+            @if(auth()->check())
+            <div class=" p-0 m-0">
+              <a  class="text-white text-decoration-none mx-3  ">Bienvenido  {{ auth()->user()->name }}  </a>
+            </div>
 
-          <div class=" p-0 m-0">
-              <a class="float-end text-white " href="">Iniciar Sesion</a>
+           <div class=" p-0 m-0">
+            <form action="{{ route('logout') }}" method="post">
+              @csrf
+              <button type="submit" class="text-white btn">Cerrar sesion</button>
+            </form>
           </div>
+
+          @else
+          <div class=" p-0 m-0">
+            <a class="float-end text-white " href=" {{ route('login') }} ">Iniciar Sesion</a>
+        </div>
+            @endif
+          
 
         </div>
       </nav>

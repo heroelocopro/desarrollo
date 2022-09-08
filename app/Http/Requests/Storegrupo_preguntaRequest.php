@@ -13,7 +13,7 @@ class Storegrupo_preguntaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**

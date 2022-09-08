@@ -6,8 +6,11 @@ use App\Models\sondeo;
 use App\Http\Requests\StoresondeoRequest;
 use App\Http\Requests\UpdatesondeoRequest;
 use App\Models\filtro;
+use App\Models\grupo_pregunta;
 use App\Models\opcion;
 use App\Models\pregunta;
+use App\Models\respuesta_pregunta;
+use Illuminate\Support\Facades\DB;
 
 class SondeoController extends Controller
 {
@@ -18,16 +21,23 @@ class SondeoController extends Controller
      */
     public function index()
     {
+        $grupospreguntas = grupo_pregunta::all();
         $preguntas = pregunta::all();
         $filtros = filtro::all();
         $opciones = opcion::all();
-        return view('sondeos.index',['preguntas' => $preguntas , 'opciones' => $opciones,'filtros' => $filtros]);
+        $respuestas = respuesta_pregunta::all();
+        return view('sondeos.index',['preguntas' => $preguntas , 'opciones' => $opciones,'filtros' => $filtros, 'grupospreguntas' => $grupospreguntas,'respuestas' => $respuestas]);
         
     }
 
 
     public function cargarSondeos(){
+        $grupospreguntas = grupo_pregunta::all();
+        $preguntas = pregunta::all();
+        $respuestas = respuesta_pregunta::all();
         $sondeos = sondeo::all();
+
+
         return view('sondeos.show',['sondeos' => $sondeos]);
     }
 
@@ -63,14 +73,14 @@ class SondeoController extends Controller
         $sondeo->hora_pub = $request->hora_pub;
         $sondeo->administrador_idadministrador = 1;
         $sondeo->administrador_usuario_idusuario = 1;
-        $sondeo->preguntas_idpreguntas = 1;
+        $sondeo->preguntas_idpreguntas = $request->grupopreguntasid;
         $sondeo->confirmacion_voto_idconfirmacion = $request->confirmacion_voto_idconfirmacion_voto;
         $sondeo->filtro_idfiltro = $request->filtro_idfiltro;
         $filtros = filtro::all();
         
         $idgrupofiltro = $filtros->find($request->filtro_idfiltro);
         $sondeo->filtro_grupo_poblacional_idgrupo =  $idgrupofiltro->grupo_poblacional_id ;
-        $sondeo->condicion_idcondicion = $request->confirmacion_voto_idconfirmacion_voto;
+        $sondeo->condicion_idcondicion = 1;
 
         $sondeo->save();
 

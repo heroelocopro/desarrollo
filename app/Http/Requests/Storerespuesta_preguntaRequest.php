@@ -13,7 +13,7 @@ class Storerespuesta_preguntaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**

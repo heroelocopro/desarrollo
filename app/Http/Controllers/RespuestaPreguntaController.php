@@ -37,6 +37,12 @@ class RespuestaPreguntaController extends Controller
     public function store(Storerespuesta_preguntaRequest $request)
     {
         //
+        $respuesta_pregunta = new respuesta_pregunta;
+        $respuesta_pregunta->idPregunta = $request->preguntas_idpreguntas;
+        $respuesta_pregunta->respuesta = $request->respuesta;
+        $respuesta_pregunta->save();
+
+        return back();
     }
 
     /**

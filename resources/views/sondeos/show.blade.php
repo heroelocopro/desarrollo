@@ -6,6 +6,7 @@
         @foreach ($sondeos as $sondeo )
             
         <div class="col-12 border rounded-3 mb-5 mt-5 shadow">
+            <p> {{ $sondeo->id }} </p>
             <p class="float-start text-success"> {{ $sondeo->fecha_inicio }} </p>
             <p class="float-start text-success ms-3"> {{ $sondeo->hora_inicio }} </p>
             <p class="float-end text-danger"> {{ $sondeo->fecha_cierre }} </p>
@@ -18,8 +19,9 @@
 
            <h4 class="text-center">Inicio de preguntas</h4>
             <form class="form-control mb-3" action="">
-                <label for="">#1</label>
-                <input class="form-control" type="text">
+                
+                    
+           
 
                 <button class="btn btn-primary m-3">Responder sondeo</button>
             </form>

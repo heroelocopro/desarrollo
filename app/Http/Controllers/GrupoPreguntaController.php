@@ -37,6 +37,11 @@ class GrupoPreguntaController extends Controller
     public function store(Storegrupo_preguntaRequest $request)
     {
         //
+
+        $grupo_pregunta = new grupo_pregunta;
+        $grupo_pregunta->nombreGrupo = $request->nombreGrupo;
+        $grupo_pregunta->save();
+        return redirect()->route('registrarSondeos');
     }
 
     /**

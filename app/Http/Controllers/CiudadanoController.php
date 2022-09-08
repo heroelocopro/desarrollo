@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\ciudadano;
-use App\Models\usuario;
+use App\Models\User;
 use App\Http\Requests\StoreusuarioRequest;
 use App\Http\Requests\StoreciudadanoRequest;
 use App\Http\Requests\UpdateciudadanoRequest;
+use Illuminate\Support\Facades\Hash;
 
 class CiudadanoController extends Controller
 {
@@ -64,11 +65,12 @@ class CiudadanoController extends Controller
             'afiliacion' => 'required'
         ]);
 
-        $usuario = new usuario;
-        $usuario->id = 0;
-        $usuario->usuario = $request->nombres;
-        $usuario->contrasena = '123456789';
-        $usuario->save();
+        $user = new User;
+        $user->name = $request->nombres;
+        $user->email = $request->correo_elec;
+        $user->password = Hash::make($request->numeroDocumento);
+        $user->role = "usuario";
+        $user->save();
 
         //Ya despues de la validacion, se llenan en un array del Modelo, es decir, genera un array, y se va llenando
         //Conforme
@@ -85,7 +87,8 @@ class CiudadanoController extends Controller
         $ciudadano->etnia = $request->etnia;
         $ciudadano->cond_disca = $request->cond_discapacitado;
         $ciudadano->conec_inter = $request->conectividad;
-        $ciudadano->usuario_idusuario = $usuario->id;
+        $ciudadano->afiliacion = $request->afiliacion;
+        $ciudadano->usuario_idusuario = $user->id;
         $ciudadano->sexo_idsexo = $request->sexo;
         $ciudadano->tipodoc_idtipodoc = $request->TipoDocumento;
         $ciudadano->nivel_edu_idnivel = $request->nivel_edu;

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('etnia');
             $table->string('cond_disca');
             $table->string('conec_inter');
+            $table->string('afiliacion');
             $table->unsignedBigInteger('usuario_idusuario');
             $table->foreign('usuario_idusuario')->references('id')->on('usuarios');
             $table->unsignedBigInteger('sexo_idsexo');
