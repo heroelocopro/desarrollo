@@ -1,8 +1,10 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <x-application-logo class="w-auto d-none" />
             </a>
         </x-slot>
 
@@ -12,7 +14,20 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('login') }}">
+
+        <div class="container   ">
+            <form method="post" action="{{ route('login') }}" class="shadow border-dark border rounded ">
+                @csrf
+                <h3 class="text-center">Log in</h3>
+            <input class="form-control m-2 w-75 d-block mx-auto "type="text" placeholder="email" name="email">
+            <input class="form-control m-2 w-75 d-block mx-auto " type="text" placeholder="password" name="password">
+            <button type="submit" class="btn btn-primary d-block mx-auto my-2">
+                Log in
+            </button>
+            </form>
+        </div>
+
+        {{-- <form method="POST" action="{{ route('login') }}">
             @csrf
 
             <!-- Email Address -->
@@ -51,6 +66,6 @@
                     {{ __('Log in') }}
                 </x-button>
             </div>
-        </form>
+        </form> --}}
     </x-auth-card>
 </x-guest-layout>

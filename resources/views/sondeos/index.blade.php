@@ -322,8 +322,8 @@
         <label class="form-label my-2" for="">Confirmacion de participacion</label>
         <p class="my-2">Usted confirma su participacion en este sondeo?</p>
         <select required class="form-select my-2" name="confirmacion_voto_idconfirmacion_voto" id="">
-            <option value="1">Si, confirmo que quiero participar en este sondeo</option>
-            <option value="2">No, declino mi participacion en este sondeo </option>
+            <option value="5">Si, confirmo que quiero participar en este sondeo</option>
+            <option value="6">No, declino mi participacion en este sondeo </option>
         </select>
 
         <button type="submit" class="btn btn-primary my-2 mx-2 d-block mx-auto mb-3">Registrar informacion</button>

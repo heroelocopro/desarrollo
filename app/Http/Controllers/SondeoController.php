@@ -35,8 +35,8 @@ class SondeoController extends Controller
         $grupospreguntas = grupo_pregunta::all();
         $preguntas = pregunta::all();
         $respuestas = respuesta_pregunta::all();
-        $sondeos = sondeo::all();
 
+        $sondeos = DB::select('select * from sondeos where fecha_cierre < curdate() and fecha_inicio < curdate();');
 
         return view('sondeos.show',['sondeos' => $sondeos]);
     }
@@ -80,7 +80,7 @@ class SondeoController extends Controller
         
         $idgrupofiltro = $filtros->find($request->filtro_idfiltro);
         $sondeo->filtro_grupo_poblacional_idgrupo =  $idgrupofiltro->grupo_poblacional_id ;
-        $sondeo->condicion_idcondicion = 1;
+        $sondeo->condicion_idcondicion = 2;
 
         $sondeo->save();
 
