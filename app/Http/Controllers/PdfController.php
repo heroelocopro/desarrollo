@@ -16,7 +16,13 @@ class PdfController extends Controller
 
     public function index() 
     {
-        $certificados = DB::select('SELECT sondeos.tema,certificados.fecha_gen,certificados.num_cert,ciudadanos.nombres,ciudadanos.apellidos,ciudadanos.num_docs FROM certificados INNER JOIN sondeos on certificados.sondeos_id = sondeos.id INNER JOIN ciudadano_has_sondeos ON sondeos.id = ciudadano_has_sondeos.ciudadano_has_sondeo_idsondeo INNER JOIN ciudadanos on ciudadano_has_sondeos.ciudadano_usuario_idusuario = ciudadanos.usuario_idusuario WHERE ciudadano_has_sondeos.ciudadano_has_sondeo = certificados.sondeos_id;');
+        $certificados = DB::table('certificados')
+        ->select('sondeos.tema','certificados.fecha_gen','certificados.num_cert','ciudadanos.nombres','ciudadanos.apellidos','ciudadanos.num_docs')
+        ->join('sondeos', 'certificados.sondeos_id', '=' ,'sondeos.id')
+        ->join('ciudadano_has_sondeos','sondeos.id','=','ciudadano_has_sondeos.ciudadano_has_sondeos')
+        ->join('ciudadanos','ciudadano_has_sondeos.ciudadano_usuario_idusuario', '=' ,'ciudadanos.usuario_idusuario')
+        ->WHERE('ciudadano_has_sondeos.ciudadano_has_sondeos','=','certificados.sondeos_id')
+        ->get();
 
 
         $this->fpdf->SetFont('Arial', 'B', 20);
@@ -27,20 +33,20 @@ class PdfController extends Controller
             $this->fpdf->SetFontSize(14.0); 
             $this->fpdf->Write(45,'Tema del sondeo:' . $certificado->tema);
             $this->fpdf->Ln(10.0);
-            $this->fpdf->Write(45,'Fecha de generacion:' . $certificado->tema);
+            $this->fpdf->Write(45,'Fecha de generacion:' . $certificado->fecha_gen);
             $this->fpdf->Ln(10.0);
-            $this->fpdf->Write(45,'Numero de certificado:' . $certificado->tema);
+            $this->fpdf->Write(45,'Numero de certificado:' . $certificado->num_cert);
             $this->fpdf->Ln(10.0);
-            $this->fpdf->Write(45,'Nombre del ciudadano:' . $certificado->tema);
+            $this->fpdf->Write(45,'Nombre del ciudadano:' . $certificado->nombres);
             $this->fpdf->Ln(10.0);
-            $this->fpdf->Write(45,'Apellido del ciudadano:' . $certificado->tema);
+            $this->fpdf->Write(45,'Apellido del ciudadano:' . $certificado->apellidos);
             $this->fpdf->Ln(10.0);
-            $this->fpdf->Write(45,'Numero de documento:' . $certificado->tema);
+            $this->fpdf->Write(45,'Numero de documento:' . $certificado->num_docs);
             $this->fpdf->Ln(50.0);
         }
 
         $this->fpdf->SetFontSize(14.0); 
-        $this->fpdf->Write(5,'Validez del certificado:' . 'Todo certificado debe tener un numero ya registrado una vez se realizo el sondeo, en caso de que el certificado sea falso no exista, el documento no se generara.');
+        $this->fpdf->Write(5,'Validez del certificado:' . 'Todo certificado debe tener un numero ya registrado una vez se realizo el sondeo, en caso de que el certificado sea falso no exista, el documento no se generara, si no hay un certificado realizado, estara en blanco');
         $this->fpdf->Output();
 
         exit;
