@@ -27,7 +27,7 @@ class PdfController extends Controller
 
         $this->fpdf->SetFont('Arial', 'B', 20);
         $this->fpdf->AddPage("L", ['200', '200']);
-        foreach($certificados as $certificado){
+         foreach($certificados as $certificado){
             $this->fpdf->SetTitle('Certificado de participacion en el sondeo de opinion');
             $this->fpdf->Text(15, 10, "Certificado de participacion en el sondeo de opinion");  
             $this->fpdf->SetFontSize(14.0); 
