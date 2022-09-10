@@ -85,7 +85,4 @@ class SondeoExport implements FromArray, WithHeadings
     }
 }
 
-/* 
-        */
-
 
