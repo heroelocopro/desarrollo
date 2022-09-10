@@ -58,8 +58,11 @@ Route::controller(OpcionController::class)->group(function(){
 //Aca estan todos los recursos que deben utilizar las vistas, en donde se especifica las URL, asi como le da la posibilidad de poder acceder a estos metodos
 Route::resource('/Administrador/{$id}', AdministradorController::class)->middleware(['auth']);
 
-Route::get('/certificado', [CertificadoController::class,'index']);
-Route::get('/certificado/pdf', [CertificadoController::class, 'createPDF'])->name('certificado-sondeo.pdf');
+Route::get('pdf', [PdfController::class, 'index']);
+
+Route::get('/excel', function () {
+    return Excel::download(new SondeoExport, 'Informes.xlsx');
+});
 
 Route::resource('/CiudadanoHasSondeos', CiudadanoHasSondeosController::class);
 Route::resource('/Condicion', CondicionController::class);
