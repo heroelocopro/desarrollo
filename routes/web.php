@@ -7,6 +7,8 @@ use App\Http\Controllers\OpcionController;
 use App\Http\Controllers\PreguntaController;
 use App\Http\Controllers\RespuestaPreguntaController;
 use App\Http\Controllers\SondeoController;
+use App\Exports\SondeoExport;
+use App\Http\Controllers\PdfController;
 use App\Models\grupo_pregunta;
 use Illuminate\Support\Facades\Route;
 
